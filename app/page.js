@@ -1,95 +1,140 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client"; // This component will run on the client-side.
 
-export default function Home() {
+import { useState } from 'react';
+
+export default function FontCalculator() {
+  const [distance, setDistance] = useState(null); // Distance in meters
+  const [minFontSize, setMinFontSize] = useState(''); // Font size in points
+  const [letterHeightMm, setLetterHeightMm] = useState(''); // Letter height in millimeters
+
+  const distances = [
+    { label: '<75 mm', value: '<75', fontSize: '24pt', letterHeightMm: '4.5mm' },
+    { label: '1m (100cm)', value: '1m', fontSize: '48pt', letterHeightMm: '9mm' },
+    { label: '2m (200cm)', value: '2m', fontSize: '100pt', letterHeightMm: '19mm' },
+    { label: '3m (300cm)', value: '3m', fontSize: '148pt', letterHeightMm: '28mm' },
+    { label: '5m (500cm)', value: '5m', fontSize: '255-510pt', letterHeightMm: '90-180mm' },
+  ];
+
+  const handleDistanceChange = (e) => {
+    const selectedDistance = e.target.value;
+    const selectedOption = distances.find(d => d.value === selectedDistance);
+
+    if (selectedOption) {
+      setDistance(selectedDistance); // Set selected distance
+      setMinFontSize(selectedOption.fontSize); // Update font size state
+      setLetterHeightMm(selectedOption.letterHeightMm); // Update letter height state
+    } else {
+      setMinFontSize('');
+      setLetterHeightMm('');
+    }
+  };
+
+  const calculateHeadingFontSize = (fontSize) => {
+    if (!fontSize || !parseInt(fontSize)) return '';
+    const numericFontSize = parseInt(fontSize); // Convert the font size to a number
+    const headingFontSize = numericFontSize * 2; // Apply coefficient of 1.5
+    return `${headingFontSize}pt`;
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <div style={styles.container}>
+      <h1 style={styles.heading}>Minimum Font Size Calculator</h1>
+
+      {/* Distance Selection */}
+      <div style={styles.formGroup}>
+        <label htmlFor="distance" style={styles.label}>Choose viewing distance to the text:</label>
+        <select id="distance" onChange={handleDistanceChange} style={styles.select}>
+          <option value="">Select distance</option>
+          {distances.map((dist) => (
+            <option key={dist.value} value={dist.value}>
+              {dist.label}
+            </option>
+          ))}
+        </select>
       </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+      {/* Minimum Font Size Display */}
+      <div style={styles.formGroup}>
+        <label htmlFor="minFontSize" style={styles.label}>Minimum Font Size (pt): </label>
+        <input
+          type="text"
+          id="minFontSize"
+          value={minFontSize}
+          readOnly
+          style={styles.input}
         />
       </div>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      {/* Letter Height Display */}
+      <div style={styles.formGroup}>
+        <label htmlFor="letterHeightMm" style={styles.label}>Minimum Letter Height (mm): </label>
+        <input
+          type="text"
+          id="letterHeightMm"
+          value={letterHeightMm}
+          readOnly
+          style={styles.input}
+        />
       </div>
-    </main>
+
+      {/* Example Text Preview */}
+      {minFontSize && (
+        <div style={styles.preview}>
+          <h2 style={{ fontSize: calculateHeadingFontSize(minFontSize), color: 'white', lineHeight: '100%', maxWidth: '50vw' }}>
+            Example Heading multiply 2.0
+          </h2>
+          <p style={{ fontSize: minFontSize, color: 'white', marginTop: '40px', marginLeft: '7vw', lineHeight: '100%' }}>
+            This text is displayed at the minimum font size of {minFontSize}.<br/>
+            This text is displayed at the minimum font size of {minFontSize}.<br/>
+            This text is displayed at the minimum font size of {minFontSize}.
+          </p>
+        </div>
+      )}
+    </div>
   );
 }
+
+const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',  // Align content to the top
+    alignItems: 'center',          // Center content horizontally
+    minHeight: '100vh',            // Full height of viewport
+    backgroundColor: '#333',       // Dark background for contrast
+    color: 'white',                // Font color white
+    padding: '20px',
+    textAlign: 'center',           // Center text
+  },
+  heading: {
+    fontSize: '24px',
+    marginBottom: '20px',
+  },
+  formGroup: {
+    marginBottom: '20px',
+  },
+  label: {
+    display: 'block',
+    marginBottom: '10px',
+    fontSize: '18px',
+  },
+  select: {
+    padding: '10px',
+    fontSize: '16px',
+    borderRadius: '4px',
+  },
+  input: {
+    padding: '10px',
+    fontSize: '16px',
+    borderRadius: '4px',
+    backgroundColor: '#444',  // Slightly lighter background for input
+    color: 'white',
+    textAlign: 'center',
+    width: '100%',
+  },
+  preview: {
+    marginTop: '60px',
+    textAlign: 'left',
+    maxWidth: '75vw'
+  },
+};
