@@ -67,7 +67,7 @@ export default function FontCalculator() {
 
       {/* Letter Height Display */}
       <div style={styles.formGroup}>
-        <label htmlFor="letterHeightMm" style={styles.label}>Minimum Letter Height (mm): </label>
+        <label htmlFor="letterHeightMm" style={styles.label}>Minimum Letter x-Height (mm): </label>
         <input
           type="text"
           id="letterHeightMm"
