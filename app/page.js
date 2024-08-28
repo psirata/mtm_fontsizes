@@ -101,9 +101,9 @@ export default function FontCalculator() {
           <div style={{width: '100%', height: (letterHeightMm), backgroundColor: 'yellow', margin: '20px 0'}} />
 
           <p style={{ fontSize: minFontSize, color: 'white', marginTop: '5vh', marginLeft: '7vw',  lineHeight: '130%' }}>
-            This text is displayed at the minimum font size of {minFontSize} or {letterHeightMm}.<br/>
-            This text is displayed at the minimum font size of {minFontSize} or {letterHeightMm}.<br/>
-            This text is displayed at the minimum font size of {minFontSize} or {letterHeightMm}.
+            This text is displayed at the minimum font size of {minFontSize} or {letterHeightMm} x-height<br/>
+            This text is displayed at the minimum font size of {minFontSize} or {letterHeightMm} x-height<br/>
+            This text is displayed at the minimum font size of {minFontSize} or {letterHeightMm} x-height
           </p>
         </div>
       )}
