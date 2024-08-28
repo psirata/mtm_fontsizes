@@ -1,6 +1,9 @@
 "use client"; // This component will run on the client-side.
 
 import { useState } from 'react';
+import Image from 'next/image';
+import mtmLogo from "./images/MTM_logo.svg";
+
 
 export default function FontCalculator() {
   const [distance, setDistance] = useState(null); // Distance in meters
@@ -32,19 +35,29 @@ export default function FontCalculator() {
   const calculateHeadingFontSize = (fontSize) => {
     if (!fontSize || !parseInt(fontSize)) return '';
     const numericFontSize = parseInt(fontSize); // Convert the font size to a number
-    const headingFontSize = numericFontSize * 2; // Apply coefficient of 1.5
+    const headingFontSize = numericFontSize * 3; // Apply coefficient of 1.5
     return `${headingFontSize}pt`;
   };
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.heading}>Minimum Font Size Calculator</h1>
+      <div>
+      <Image
+      priority
+      src={mtmLogo}
+      height={80}
+      width={80}
+      style={{ filter: 'invert(100%)' }}
+      alt="MTM_logo"
+    />
+      </div>
+      <h1 style={styles.heading}>Калькулятор минимального размера шрифта</h1>
 
       {/* Distance Selection */}
       <div style={styles.formGroup}>
-        <label htmlFor="distance" style={styles.label}>Choose viewing distance to the text:</label>
+        <label htmlFor="distance" style={styles.label}>Выберите расстояние до текста:</label>
         <select id="distance" onChange={handleDistanceChange} style={styles.select}>
-          <option value="">Select distance</option>
+          <option value="">Выберите расстояние</option>
           {distances.map((dist) => (
             <option key={dist.value} value={dist.value}>
               {dist.label}
@@ -55,7 +68,7 @@ export default function FontCalculator() {
 
       {/* Minimum Font Size Display */}
       <div style={styles.formGroup}>
-        <label htmlFor="minFontSize" style={styles.label}>Minimum Font Size (pt): </label>
+        <label htmlFor="minFontSize" style={styles.label}>Минимальный размер шрифта (pt): </label>
         <input
           type="text"
           id="minFontSize"
@@ -67,7 +80,7 @@ export default function FontCalculator() {
 
       {/* Letter Height Display */}
       <div style={styles.formGroup}>
-        <label htmlFor="letterHeightMm" style={styles.label}>Minimum Letter x-Height (mm): </label>
+        <label htmlFor="letterHeightMm" style={styles.label}>Минимальный размер строчной буквы (mm): </label>
         <input
           type="text"
           id="letterHeightMm"
@@ -80,13 +93,17 @@ export default function FontCalculator() {
       {/* Example Text Preview */}
       {minFontSize && (
         <div style={styles.preview}>
-          <h2 style={{ fontSize: calculateHeadingFontSize(minFontSize), color: 'white', lineHeight: '100%', maxWidth: '50vw' }}>
-            Example Heading multiply 2.0
+          <h2 style={{ fontSize: calculateHeadingFontSize(minFontSize), color: 'white', lineHeight: '110%', maxWidth: '50vw', marginBottom: '5vh' }}>
+            Заголовок: x3 {calculateHeadingFontSize(minFontSize)}
           </h2>
-          <p style={{ fontSize: minFontSize, color: 'white', marginTop: '40px', marginLeft: '7vw', lineHeight: '100%' }}>
-            This text is displayed at the minimum font size of {minFontSize}.<br/>
-            This text is displayed at the minimum font size of {minFontSize}.<br/>
-            This text is displayed at the minimum font size of {minFontSize}.
+
+      {/* Yellow Divider */}
+          <div style={{width: '100%', height: (letterHeightMm), backgroundColor: 'yellow', margin: '20px 0'}} />
+
+          <p style={{ fontSize: minFontSize, color: 'white', marginTop: '5vh', marginLeft: '7vw',  lineHeight: '130%' }}>
+            This text is displayed at the minimum font size of {minFontSize} or {letterHeightMm}.<br/>
+            This text is displayed at the minimum font size of {minFontSize} or {letterHeightMm}.<br/>
+            This text is displayed at the minimum font size of {minFontSize} or {letterHeightMm}.
           </p>
         </div>
       )}
@@ -107,7 +124,7 @@ const styles = {
     textAlign: 'center',           // Center text
   },
   heading: {
-    fontSize: '24px',
+    fontSize: '32px',
     marginBottom: '20px',
   },
   formGroup: {
@@ -135,6 +152,13 @@ const styles = {
   preview: {
     marginTop: '60px',
     textAlign: 'left',
-    maxWidth: '75vw'
+    maxWidth: '75vw',
+    // overFlow: 'hidden'
   },
+  // divider: {
+  //   width: '100%',
+  //   height: 'calc(1rem * "letterHeightMm" )',
+  //   backgroundColor: 'yellow',
+  //   margin: '20px 0',  // Space around the divider
+  // }
 };

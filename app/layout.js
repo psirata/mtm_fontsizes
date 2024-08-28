@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import localFont from 'next/font/local'
 
 import "./globals.css";
-const myFont = localFont({ src: '/fonts/MTM8-Regular.otf' })
+const myFont = localFont({ src: '/fonts/MTMDisplay-Regular.otf' })
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
