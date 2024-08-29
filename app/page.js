@@ -5,7 +5,7 @@ import Image from 'next/image';
 import mtmLogo from "./images/MTM_logo.svg";
 
 export default function FontCalculator() {
-  const [distance, setDistance] = useState(100); // Distance in cm (default to 1 meter)
+  const [distance, setDistance] = useState(75); // Distance in cm (default to 1 meter)
 
   const distances = [
     { min: 0, max: 75, minFontSize: 24, maxFontSize: 24, minLetterHeight: 4.5, maxLetterHeight: 4.5 },
@@ -40,7 +40,7 @@ export default function FontCalculator() {
   };
 
   const dividerHeight = Math.round(letterHeight) * 2; // Dynamic divider height
-  const dividerWidth = Math.round(letterHeight) * 4;
+  const dividerWidth = Math.round(letterHeight) * 8;
   const dividerMargin = calculateHeadingFontSize(fontSize) / 1.4;
   const bodyWidth = calculateHeadingFontSize(fontSize) * 7;
 
@@ -113,7 +113,7 @@ export default function FontCalculator() {
           </h2>
 
           {/* Yellow Divider */}
-          <div style={{ ...styles.divider, height: `${dividerHeight}px`, width: `${dividerWidth}vw`, margin: `${dividerMargin}px 0` }} />
+          <div style={{ ...styles.divider, height: `${dividerHeight}px`, width: `${dividerWidth}%`, margin: `${dividerMargin}px 0` }} />
 
           <p style={{ fontSize: `${fontSize}pt`, color: 'white', textAlign: 'left', marginLeft: '3vw', width: `${bodyWidth}px`, lineHeight: '120%' }}>
             Текст, который вы видите в этом абзаце элегантно набран минимально допустимым размером кегля — {fontSize}pt.
