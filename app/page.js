@@ -113,7 +113,7 @@ export default function FontCalculator() {
           </h2>
 
           {/* Yellow Divider */}
-          <div style={{ ...styles.divider, height: `${dividerHeight}px`, width: `${dividerWidth}%`, margin: `${dividerMargin}px 0` }} />
+          <div style={{ ...styles.divider, height: `${dividerHeight}px`, width: `${bodyWidth}px`, margin: `${dividerMargin}px 0` }} />
 
           <p style={{ fontSize: `${fontSize}pt`, color: 'white', textAlign: 'left', marginLeft: '3vw', width: `${bodyWidth}px`, lineHeight: '120%' }}>
             Текст, который вы видите в этом абзаце элегантно набран минимально допустимым размером кегля — {fontSize}pt.
