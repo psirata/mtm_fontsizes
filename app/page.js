@@ -21,7 +21,7 @@ export default function FontCalculator() {
       if (selectedDistance >= range.min && selectedDistance <= range.max) {
         const rangeProgress = (selectedDistance - range.min) / (range.max - range.min);
         const fontSize = Math.round(range.minFontSize + rangeProgress * (range.maxFontSize - range.minFontSize));
-        const letterHeight = Math.round(range.minLetterHeight + rangeProgress * (range.maxLetterHeight - range.minLetterHeight));
+        const letterHeight = Math.round((range.minLetterHeight + rangeProgress * (range.maxLetterHeight - range.minLetterHeight)) * 10) / 10;
         return { fontSize, letterHeight };
       }
     }
@@ -108,7 +108,7 @@ export default function FontCalculator() {
       {/* Example Text Preview */}
       {fontSize && (
         <div style={styles.preview}>
-          <h2 style={{ fontSize: `${calculateHeadingFontSize(fontSize)}pt`, color: 'white', textAlign: 'left', lineHeight: '100%', marginTop: '2vh'  }}>
+          <h2 style={{ fontSize: `${calculateHeadingFontSize(fontSize)}pt`, color: 'white', textAlign: 'left', lineHeight: '105%', marginTop: '2vh'  }}>
             Заголовок мин * 2.7
           </h2>
 
