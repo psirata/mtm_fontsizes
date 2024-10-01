@@ -109,7 +109,7 @@ export default function FontCalculator() {
       {fontSize && (
         <div style={styles.preview}>
           <h2 style={{ fontSize: `${calculateHeadingFontSize(fontSize)}pt`, color: 'white', textAlign: 'left', lineHeight: '105%', marginTop: '2vh'  }}>
-            Заголовок мин * 2.7
+            Заголовок мин*2.7
           </h2>
 
           {/* Yellow Divider */}
