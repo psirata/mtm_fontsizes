@@ -99,7 +99,7 @@ export default function FontCalculator() {
         <input
           type="text"
           id="letterHeightMm"
-          value={`${letterHeight}mm`}
+          value={`${Math.round(letterHeight)}mm`}
           readOnly
           style={styles.input}
         />
