@@ -95,7 +95,7 @@ export default function FontCalculator() {
 
       {/* Letter Height Display */}
       <div style={styles.formGroup}>
-        <label htmlFor="letterHeightMm" style={styles.label}>Минимальный строчная (mm): </label>
+        <label htmlFor="letterHeightMm" style={styles.label}>Минимальная строчная (mm): </label>
         <input
           type="text"
           id="letterHeightMm"
